@@ -1,0 +1,16 @@
+""" 5__________6
+    /         /|
+   /         / |
+  /         /  |
+1/________2/   |
+|         |    |
+|         |    |
+|         |    7
+|         |   /
+|         |  /
+|         | /
+0_________3/
+"""
+# left-right right is positive
+# up-down up is positive
+# front-back front is positive
