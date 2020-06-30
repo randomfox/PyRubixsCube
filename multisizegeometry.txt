@@ -1,0 +1,6 @@
+for the edges: do the normal stuff in a for loop with the left-right vertices ajusting to the size and range includes the smallest interger but not the largest
+like:
+
+for i in range(-self.size, self.size, 2):
+    # have the list of lists of lists in here
+    # I may have to do it side by side or corner-to-corner by corner-to-corner

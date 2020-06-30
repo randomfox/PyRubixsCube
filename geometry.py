@@ -82,7 +82,7 @@ class Geometry:
             ]
 
         else:
-            pass
+            self.center_pieces = [[[0,0,0] for i in range(8)] for i in range(6)]
 
         # in cube.py in the function on line 386(371) is the only place this variable is used
         self.axes = ((0, 1), (2, 3), (4, 5))
@@ -99,130 +99,134 @@ class Geometry:
         )
 
         # Have to add this yet, need something to generate it for different sizes
-        self.edge_pieces = [
-            # X
-            # 0
-            [[[2-self.size, -self.size, self.size],
-              [2-self.size, 2-self.size, self.size],
-              [-2+self.size, 2-self.size, self.size],
-              [-2+self.size, -self.size, self.size],
-              [2-self.size, -self.size, -2+self.size],
-              [2-self.size, 2-self.size, -2+self.size],
-              [-2+self.size, 2-self.size, -2+self.size],
-              [-2+self.size, -self.size, -2+self.size]],
+        if self.size < 3:
+            self.dege_pieces = [[[[0,0,0] for i in range(8)] for j in range(4)] for k in range(3)]
+        else:
+            #for i in range(-self.size, self.size, 2):
+            self.edge_pieces = [
+                # X
+                # 0
+                [[[-1, -self.size, self.size],
+                  [-1, 2-self.size, self.size],
+                  [1, 2-self.size, self.size],
+                  [1, -self.size, self.size],
+                  [-1, -self.size, -2+self.size],
+                  [-1, 2-self.size, -2+self.size],
+                  [1, 2-self.size, -2+self.size],
+                  [1, -self.size, -2+self.size]],
 
-             # 1
-             [[2-self.size, self.size-2, self.size],
-              [2-self.size, self.size, self.size],
-              [self.size-2, self.size, self.size],
-              [self.size-2, self.size-2, self.size],
-              [2-self.size, self.size-2, self.size-2],
-              [2-self.size, self.size, self.size-2],
-              [self.size-2, self.size, self.size-2],
-              [self.size-2, self.size-2, self.size-2]],
+                 # 1
+                 [[-1, self.size-2, self.size],
+                  [-1, self.size, self.size],
+                  [1, self.size, self.size],
+                  [1, self.size-2, self.size],
+                  [-1, self.size-2, self.size-2],
+                  [-1, self.size, self.size-2],
+                  [1, self.size, self.size-2],
+                  [1, self.size-2, self.size-2]],
 
-             # 2
-             [[2-self.size, -2+self.size, 2-self.size],
-              [2-self.size, self.size, 2-self.size],
-              [-2+self.size, self.size, 2-self.size],
-              [-2+self.size, -2+self.size, 2-self.size],
-              [2-self.size, -2+self.size, -self.size],
-              [2-self.size, self.size, -self.size],
-              [-2+self.size, self.size, -self.size],
-              [-2+self.size, -2+self.size, -self.size]],
+                 # 2
+                 [[-1, -2+self.size, 2-self.size],
+                  [-1, self.size, 2-self.size],
+                  [1, self.size, 2-self.size],
+                  [1, -2+self.size, 2-self.size],
+                  [-1, -2+self.size, -self.size],
+                  [-1, self.size, -self.size],
+                  [1, self.size, -self.size],
+                  [1, -2+self.size, -self.size]],
 
-             # 3
-             [[2-self.size, -self.size, 2-self.size],
-              [2-self.size, 2-self.size, 2-self.size],
-              [-2+self.size, 2-self.size, 2-self.size],
-              [-2+self.size, -self.size, 2-self.size],
-              [2-self.size, -self.size, -self.size],
-              [2-self.size, 2-self.size, -self.size],
-              [-2+self.size, 2-self.size, -self.size],
-              [-2+self.size, -self.size, -self.size]]],
+                 # 3
+                 [[-1, -self.size, 2-self.size],
+                  [-1, 2-self.size, 2-self.size],
+                  [1, 2-self.size, 2-self.size],
+                  [1, -self.size, 2-self.size],
+                  [-1, -self.size, -self.size],
+                  [-1, 2-self.size, -self.size],
+                  [1, 2-self.size, -self.size],
+                  [1, -self.size, -self.size]]],
 
-            # Y
-            # 0
-            [[[-self.size, 2-self.size, self.size],
-              [-self.size, -2+self.size, self.size],
-              [2-self.size, -2+self.size, self.size],
-              [2-self.size, 2-self.size, self.size],
-              [-self.size, 2-self.size, -2+self.size],
-              [-self.size, -2+self.size, -2+self.size],
-              [2-self.size, -2+self.size, -2+self.size],
-              [2-self.size, 2-self.size, -2+self.size]],
+                # Y
+                # 0
+                [[[-self.size, -1, self.size],
+                  [-self.size, 1, self.size],
+                  [2-self.size, 1, self.size],
+                  [2-self.size, -1, self.size],
+                  [-self.size, -1, -2+self.size],
+                  [-self.size, 1, -2+self.size],
+                  [2-self.size, 1, -2+self.size],
+                  [2-self.size, -1, -2+self.size]],
 
-             # 1
-             [[-self.size, 2-self.size, 2-self.size],
-              [-self.size, -2+self.size, 2-self.size],
-              [2-self.size, -2+self.size, 2-self.size],
-              [2-self.size, 2-self.size, 2-self.size],
-              [-self.size, 2-self.size, -self.size],
-              [-self.size, -2+self.size, -self.size],
-              [2-self.size, -2+self.size, -self.size],
-              [2-self.size, 2-self.size, -self.size]],
+                 # 1
+                 [[-self.size, -1, 2-self.size],
+                  [-self.size, 1, 2-self.size],
+                  [2-self.size, 1, 2-self.size],
+                  [2-self.size, -1, 2-self.size],
+                  [-self.size, -1, -self.size],
+                  [-self.size, 1, -self.size],
+                  [2-self.size, 1, -self.size],
+                  [2-self.size, -1, -self.size]],
 
-             # 2
-             [[-2+self.size, 2-self.size, 2-self.size],
-              [-2+self.size, -2+self.size, 2-self.size],
-              [self.size, -2+self.size, 2-self.size],
-              [self.size, 2-self.size, 2-self.size],
-              [-2+self.size, 2-self.size, -self.size],
-              [-2+self.size, -2+self.size, -self.size],
-              [self.size, -2+self.size, -self.size],
-              [self.size, 2-self.size, -self.size]],
+                 # 2
+                 [[-2+self.size, -1, 2-self.size],
+                  [-2+self.size, 1, 2-self.size],
+                  [self.size, 1, 2-self.size],
+                  [self.size, -1, 2-self.size],
+                  [-2+self.size, -1, -self.size],
+                  [-2+self.size, 1, -self.size],
+                  [self.size, 1, -self.size],
+                  [self.size, -1, -self.size]],
 
-             # 3
-             [[-2+self.size, 2-self.size, self.size],
-              [-2+self.size, -2+self.size, self.size],
-              [self.size, -2+self.size, self.size],
-              [self.size, 2-self.size, self.size],
-              [-2+self.size, 2-self.size, -2+self.size],
-              [-2+self.size, -2+self.size, -2+self.size],
-              [self.size, -2+self.size, -2+self.size],
-              [self.size, 2-self.size, -2+self.size]]],
+                 # 3
+                 [[-2+self.size, -1, self.size],
+                  [-2+self.size, 1, self.size],
+                  [self.size, 1, self.size],
+                  [self.size, -1, self.size],
+                  [-2+self.size, -1, -2+self.size],
+                  [-2+self.size, 1, -2+self.size],
+                  [self.size, 1, -2+self.size],
+                  [self.size, -1, -2+self.size]]],
 
-            # Z
-            # 0
-            [[[-self.size, -self.size, -2+self.size],
-              [-self.size, 2-self.size, -2+self.size],
-              [2-self.size, 2-self.size, -2+self.size],
-              [2-self.size, -self.size, -2+self.size],
-              [-self.size, -self.size, 2-self.size],
-              [-self.size, 2-self.size, 2-self.size],
-              [2-self.size, 2-self.size, 2-self.size],
-              [2-self.size, -self.size, 2-self.size]],
+                # Z
+                # 0
+                [[[-self.size, -self.size, 1],
+                  [-self.size, 2-self.size, 1],
+                  [2-self.size, 2-self.size, 1],
+                  [2-self.size, -self.size, 1],
+                  [-self.size, -self.size, -1],
+                  [-self.size, 2-self.size, -1],
+                  [2-self.size, 2-self.size, -1],
+                  [2-self.size, -self.size, -1]],
 
-             # 1
-             [[-self.size, -2+self.size, -2+self.size],
-              [-self.size, self.size, -2+self.size],
-              [2-self.size, self.size, -2+self.size],
-              [2-self.size, -2+self.size, -2+self.size],
-              [-self.size, -2+self.size, 2-self.size],
-              [-self.size, self.size, 2-self.size],
-              [2-self.size, self.size, 2-self.size],
-              [2-self.size, -2+self.size, 2-self.size]],
+                 # 1
+                 [[-self.size, -2+self.size, 1],
+                  [-self.size, self.size, 1],
+                  [2-self.size, self.size, 1],
+                  [2-self.size, -2+self.size, 1],
+                  [-self.size, -2+self.size, -1],
+                  [-self.size, self.size, -1],
+                  [2-self.size, self.size, -1],
+                  [2-self.size, -2+self.size, -1]],
 
-             # 2
-             [[-2+self.size, -2+self.size, -2+self.size],
-              [-2+self.size, self.size, -2+self.size],
-              [self.size, self.size, -2+self.size],
-              [self.size, -2+self.size, -2+self.size],
-              [-2+self.size, -2+self.size, 2-self.size],
-              [-2+self.size, self.size, 2-self.size],
-              [self.size, self.size, 2-self.size],
-              [self.size, -2+self.size, 2-self.size]],
+                 # 2
+                 [[-2+self.size, -2+self.size, 1],
+                  [-2+self.size, self.size, 1],
+                  [self.size, self.size, 1],
+                  [self.size, -2+self.size, 1],
+                  [-2+self.size, -2+self.size, -1],
+                  [-2+self.size, self.size, -1],
+                  [self.size, self.size, -1],
+                  [self.size, -2+self.size, -1]],
 
-             # 3
-             [[-2+self.size, -self.size, -2+self.size],
-              [-2+self.size, 2-self.size, -2+self.size],
-              [self.size, 2-self.size, -2+self.size],
-              [self.size, -self.size, -2+self.size],
-              [-2+self.size, -self.size, 2-self.size],
-              [-2+self.size, 2-self.size, 2-self.size],
-              [self.size, 2-self.size, 2-self.size],
-              [self.size, -self.size, 2-self.size]]]
-        ]
+                 # 3
+                 [[-2+self.size, -self.size, 1],
+                  [-2+self.size, 2-self.size, 1],
+                  [self.size, 2-self.size, 1],
+                  [self.size, -self.size, 1],
+                  [-2+self.size, -self.size, -1],
+                  [-2+self.size, 2-self.size, -1],
+                  [self.size, 2-self.size, -1],
+                  [self.size, -self.size, -1]]]
+            ]
 
        # Have to add this yet, need something to generate it for different sizes
         self.corner_pieces = [
