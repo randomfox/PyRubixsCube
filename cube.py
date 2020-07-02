@@ -227,19 +227,24 @@ class Cube:
         if face == FaceRotation.DOWN_CW or face == FaceRotation.DOWN_CCW:
             self.rotate_down_face(theta)
 
-    def rotate_front_face(self, theta):
-        for i in range(8):
-            self.geometry.center_pieces[0][i] = z_rot(self.geometry.center_pieces[0][i], theta)
+    def rotate_front_face(self, theta, layer=1):
+        for pieces in self.geometry.center_pieces[0]:
+            for piece in pieces:
+                for i in range(8):
+                    piece[i] = z_rot(piece[i], theta)
+                    #self.geometry.center_pieces[0][i] = z_rot(self.geometry.center_pieces[0][i], theta)
         for axis in self.geometry.edge_pieces:
-            for piece in axis:
-                flag = True
-                for vertex in piece:
-                    if vertex[2] < 0:
-                        flag = False
-                        break
-                if flag:
-                    for i in range(8):
-                        piece[i] = z_rot(piece[i], theta)
+            for pieces in axis:
+                for piece in pieces:
+                    flag = True
+                    for vertex in piece:
+                        if vertex[2] < (self.size-1) - (layer*2):
+                        #if vertex[2] < 0:
+                            flag = False
+                            break
+                    if flag:
+                        for i in range(8):
+                            piece[i] = z_rot(piece[i], theta)
         for piece in self.geometry.corner_pieces:
             flag = True
             for vertex in piece:
@@ -250,42 +255,52 @@ class Cube:
                 for i in range(8):
                     piece[i] = z_rot(piece[i], theta)
 
-    def rotate_back_face(self, theta):
-        for i in range(8):
-            self.geometry.center_pieces[2][i] = z_rot(self.geometry.center_pieces[2][i], theat)
+    def rotate_back_face(self, theta, layer=1):
+        for pieces in self.geometry.center_pieces[2]:
+            for piece in pieces:
+                for i in range(8):
+                    piece[i] = z_rot(piece[i], theta)
+                    #self.geometry.center_pieces[2][i] = z_rot(self.geometry.center_pieces[2][i], theta)
         for axis in self.geometry.edge_pieces:
-            for piece in axis:
-                flag = True
-                for vertex in piece:
-                    if vertex[2] > 0:
-                        flag = False
-                        break
-                if flag:
-                    for i in range(8):
-                        piece[i] = z_rot(piece[i], theta)
+            for pieces in axis:
+                for piece in pieces:
+                    flag = True
+                    for vertex in piece:
+                        #if vertex[2] > 0:
+                        if vertex[2] > (-self.size+1) + (layer*2): # or vertex[2] > (-self.size-1) + (layer*2):
+                            flag = False
+                            break
+                    if flag:
+                        for i in range(8):
+                            piece[i] = z_rot(piece[i], theta)
         for piece in self.geometry.corner_pieces:
             flag = True
             for vertex in piece:
-                if vertex[0] > 0:
+                if vertex[2] > 0:
                     flag = False
                     break
             if flag:
                 for i in range(8):
-                    piece[i] = z_rot(piece[i], theat)
+                    piece[i] = z_rot(piece[i], theta)
 
-    def rotate_left_face(self, theta):
-        for i in range(8):
-            self.geometry.center_pieces[1][i] = x_rot(self.geometry.center_pieces[1][i], theta)
+    def rotate_left_face(self, theta, layer=1):
+        for pieces in self.geometry.center_pieces[1]:
+            for piece in pieces:
+                for i in range(8):
+                    piece[i] = x_rot(piece[i], theta)
+                    #self.geometry.center_pieces[1][i] = x_rot(self.geometry.center_pieces[1][i], theta)
         for axis in self.geometry.edge_pieces:
-            for piece in axis:
-                flag = True
-                for vertex in piece:
-                    if vertex[0] > 0:
-                        flag = False
-                        break
-                if flag:
-                    for i in range(8):
-                        piece[i] = x_rot(piece[i], theta)
+            for pieces in axis:
+                for piece in pieces:
+                    flag = True
+                    for vertex in piece:
+                        #if vertex[0] > 0:
+                        if vertex[0] > (-self.size+1) + (layer*2):
+                            flag = False
+                            break
+                    if flag:
+                        for i in range(8):
+                            piece[i] = x_rot(piece[i], theta)
         for piece in self.geometry.corner_pieces:
             flag = True
             for vertex in piece:
@@ -296,19 +311,24 @@ class Cube:
                 for i in range(8):
                     piece[i] = x_rot(piece[i], theta)
 
-    def rotate_right_face(self, theta):
-        for i in range(8):
-            self.geometry.center_pieces[3][i] = x_rot(self.geometry.center_pieces[3][i], theta)
+    def rotate_right_face(self, theta, layer=1):
+        for pieces in self.geometry.center_pieces[3]:
+            for piece in pieces:
+                for i in range(8):
+                    piece[i] = x_rot(piece[i], theta)
+                    #self.geometry.center_pieces[3][i] = x_rot(self.geometry.center_pieces[3][i], theta)
         for axis in self.geometry.edge_pieces:
-            for piece in axis:
-                flag = True
-                for vertex in piece:
-                    if vertex[0] < 0:
-                        flag = False
-                        break
-                if flag:
-                    for i in range(8):
-                        piece[i] = x_rot(piece[i], theta)
+            for pieces in axis:
+                for piece in pieces:
+                    flag = True
+                    for vertex in piece:
+                        #if vertex[0] < 0:
+                        if vertex[0] < (self.size-1) - (layer*2):
+                            flag = False
+                            break
+                    if flag:
+                        for i in range(8):
+                            piece[i] = x_rot(piece[i], theta)
         for piece in self.geometry.corner_pieces:
             flag = True
             for vertex in piece:
@@ -318,19 +338,25 @@ class Cube:
                 for i in range(8):
                     piece[i] = x_rot(piece[i], theta)
 
-    def rotate_up_face(self, theta):
-        for i in range(8):
-            self.geometry.center_pieces[4][i] = y_rot(self.geometry.center_pieces[4][i], theta)
+    def rotate_up_face(self, theta, layer=1):
+        for pieces in self.geometry.center_pieces[4]:
+            for piece in pieces:
+                for i in range(8):
+                    piece[i] = y_rot(piece[i], theta)
+                #self.geometry.center_pieces[4][i] = y_rot(self.geometry.center_pieces[4][i], theta)
         for axis in self.geometry.edge_pieces:
-            for piece in axis:
-                flag = True
-                for vertex in piece:
-                    if vertex[1] < 0:
-                        flag = False
-                        break
-                if flag:
-                    for i in range(8):
-                        piece[i] = y_rot(piece[i], theta)
+            for pieces in axis:
+                for piece in pieces:
+                    flag = True
+                    for vertex in piece:
+                        #if vertex[1] < 0:
+                        if vertex[1] < (self.size-1) - (layer*2):
+                        #if vertex[1] < self.size - layer*2:
+                            flag = False
+                            break
+                    if flag:
+                        for i in range(8):
+                            piece[i] = y_rot(piece[i], theta)
         for piece in self.geometry.corner_pieces:
             flag = True
             for vertex in piece:
@@ -341,19 +367,25 @@ class Cube:
                 for i in range(8):
                     piece[i] = y_rot(piece[i], theta)
 
-    def rotate_down_face(self, theta):
-        for i in range(8):
-            self.geometry.center_pieces[5][i] = y_rot(self.geometry.center_pieces[5][i], theta)
+    def rotate_down_face(self, theta, layer=1):
+        for pieces in self.geometry.center_pieces[5]:
+            for piece in pieces:
+                for i in range(8):
+                    piece[i] = y_rot(piece[i], theta)
+                    #self.geometry.center_pieces[5][i] = y_rot(self.geometry.center_pieces[5][i], theta)
         for axis in self.geometry.edge_pieces:
-            for piece in axis:
-                flag = True
-                for vertex in piece:
-                    if vertex[1] > 0:
-                        flag = False
-                        break
-                if flag:
-                    for i in range(8):
-                        piece[i] = y_rot(piece[i], theta)
+            for pieces in axis:
+                for piece in pieces:
+                    flag = True
+                    for vertex in piece:
+                        #if vertex[1] > 0:
+                        if vertex[1] > (-self.size+1) + (layer*2):
+                        #if vertex[1] > -self.size + layer*2:
+                            flag = False
+                            break
+                    if flag:
+                        for i in range(8):
+                            piece[i] = y_rot(piece[i], theta)
         for piece in self.geometry.corner_pieces:
             flag = True
             for vertex in piece:
@@ -379,6 +411,7 @@ class Cube:
         glEnd()
 
     def render_lines(self):
+        print('render lines')
         glLineWidth(self.line_width)
         glColor3f(0, 0, 0)
         glBegin(GL_LINES)
@@ -419,17 +452,20 @@ class Cube:
         # render edge pieces
         for color, surface, face in zip(self.face_colors, self.geometry.cube_surfaces, self.geometry.edges):
             glColor3f(color[0], color[1], color[2])
-            for piece in face:
-                for vertex in surface:
-                    p = self.geometry.edge_pieces[piece[0]][piece[1]][vertex]
-                    glVertex3f(p[0], p[1], p[2])
+            for piece_index in face:
+                for piece in self.geometry.edge_pieces[piece_index[0]][piece_index[1]]:
+                    for vertex in surface:
+                        p = piece[vertex]
+                        #p = self.geometry.edge_pieces[piece[0]][piece[1]][vertex]
+                        glVertex3f(p[0], p[1], p[2])
         glColor3f(inner_color[0], inner_color[1], inner_color[2])
         for i in range(len(self.geometry.edge_black_pat)):
             for face in self.geometry.edge_black_pat[i]:
-                for piece in self.geometry.edge_pieces[i]:
-                    for vertex in self.geometry.cube_surfaces[face]:
-                        v = piece[vertex]
-                        glVertex3f(v[0], v[1], v[2])
+                for pieces in self.geometry.edge_pieces[i]:
+                    for piece in pieces:
+                        for vertex in self.geometry.cube_surfaces[face]:
+                            v = piece[vertex]
+                            glVertex3f(v[0], v[1], v[2])
 
         # render corner pieces
         for i in range(len(self.geometry.corner_black_pat)):
@@ -459,24 +495,30 @@ class Cube:
         i = 0
         for color, surface in zip(self.face_colors, self.geometry.cube_surfaces):
             glColor3f(color[0], color[1], color[2])
-            ti = 0
-            for vertex in surface:
-                v = self.geometry.center_pieces[i][vertex]
-                glVertex3f(v[0], v[1], v[2])
-                glTexCoord2f(tex_coords[ti][0], tex_coords[ti][1])
-                ti += 1
+            #ti = 0
+            for pieces in self.geometry.center_pieces[i]:
+                for piece in pieces:
+                    ti = 0
+                    for vertex in surface:
+                        v = piece[vertex]
+                        glVertex3f(v[0], v[1], v[2])
+                        glTexCoord2f(tex_coords[ti][0], tex_coords[ti][1])
+                        ti += 1
             i += 1
 
         # render edge pieces
         for color, surface, face in zip(self.face_colors, self.geometry.cube_surfaces, self.geometry.edges):
             glColor3f(color[0], color[1], color[2])
-            for piece in face:
-                ti = 0
-                for vertex in surface:
-                    p = self.geometry.edge_pieces[piece[0]][piece[1]][vertex]
-                    glVertex3f(p[0], p[1], p[2])
-                    glTexCoord2f(tex_coords[ti][0], tex_coords[ti][1])
-                    ti += 1
+            for piece_index in face:
+                # ti = 0
+                for piece in self.geometry.edge_pieces[piece_index[0]][piece_index[1]]:
+                    ti = 0
+                    for vertex in surface:
+                        p = piece[vertex]
+                        #p = self.geometry.edge_pieces[piece[0]][piece[1]][vertex]
+                        glVertex3f(p[0], p[1], p[2])
+                        glTexCoord2f(tex_coords[ti][0], tex_coords[ti][1])
+                        ti += 1
 
         # render corner pieces
         for i in range(len(self.geometry.corner_color_pat)):
@@ -499,22 +541,25 @@ class Cube:
         i = 0
         for color, surface in zip(self.face_colors, self.geometry.cube_surfaces):
             j = 0
-            for piece in self.geometry.center_pieces:
-                glColor3f(inner_color[0], inner_color[1], inner_color[2])
-                for vertex in surface:
-                    v = self.geometry.center_pieces[j][vertex]
-                    glVertex3f(v[0], v[1], v[2])
-                j += 1
+            for pieces in self.geometry.center_pieces[i]:
+                j = 0
+                for piece in pieces:
+                    glColor3f(inner_color[0], inner_color[1], inner_color[2])
+                    for vertex in surface:
+                        v = piece[vertex]
+                        glVertex3f(v[0], v[1], v[2])
+                    j += 1
             i += 1
 
         # render edge pieces
         glColor3f(inner_color[0], inner_color[1], inner_color[2])
         for i in range(len(self.geometry.edge_black_pat)):
             for face in self.geometry.edge_black_pat[i]:
-                for piece in self.geometry.edge_pieces[i]:
-                    for vertex in self.geometry.cube_surfaces[face]:
-                        v = piece[vertex]
-                        glVertex3f(v[0], v[1], v[2])
+                for pieces in self.geometry.edge_pieces[i]:
+                    for piece in pieces:
+                        for vertex in self.geometry.cube_surfaces[face]:
+                            v = piece[vertex]
+                            glVertex3f(v[0], v[1], v[2])
 
         # render corner pieces
         glColor3f(inner_color[0], inner_color[1], inner_color[2])

@@ -14,3 +14,7 @@
 # left-right right is positive
 # up-down up is positive
 # front-back front is positive
+
+x axes is what right turns on
+y axes is what front turns on
+z axes would be what up turns on

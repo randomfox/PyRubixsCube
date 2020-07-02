@@ -18,67 +18,89 @@ class Geometry:
 
     def init_geomentry(self, size=1):
         if self.size % 2 == 1:
+            # trying to autogen the centers
+            # self.center_pieces = [[[[0,0,0] for i in range(8)] for i in range(self.size)] for i in range(6)]
             # Do the centers in this block
             self.center_pieces = [
                 # Front 0 Green
-                [[-1, -1, self.size],
-                 [-1, 1, self.size],
-                 [1, 1, self.size],
-                 [1, -1, self.size],
-                 [-1, -1, self.size-2],
-                 [-1, 1, self.size-2],
-                 [1, 1, self.size-2],
-                 [1, -1, self.size-2]],
+                #[[-1, -1, self.size],
+                # [-1, 1, self.size],
+                # [1, 1, self.size],
+                # [1, -1, self.size],
+                # [-1, -1, self.size-2],
+                # [-1, 1, self.size-2],
+                # [1, 1, self.size-2],
+                # [1, -1, self.size-2]],
+                [[[[i, j, self.size],
+                   [i, j+2, self.size],
+                   [i+2, j+2, self.size],
+                   [i+2, j, self.size],
+                   [i, j, self.size-2],
+                   [i, j+2, self.size-2],
+                   [i+2, j+2, self.size-2],
+                   [i+2, j, self.size-2]
+                  ] for i in range(-self.size+2, self.size-2, 2)
+                ] for j in range(-self.size+2, self.size-2, 2)],
 
                 # Left 1 Orange
-                [[-self.size, -1, 1],
-                 [-self.size, 1, 1],
-                 [2-self.size, 1, 1],
-                 [2-self.size, -1, 1],
-                 [-self.size, -1, -1],
-                 [-self.size, 1, -1],
-                 [2-self.size, 1, -1],
-                 [2-self.size, -1, -1]],
+                [[[[-self.size, i, j+2],
+                   [-self.size, i+2, j+2],
+                   [2-self.size, i+2, j+2],
+                   [2-self.size, i, j+2],
+                   [-self.size, i, j],
+                   [-self.size, i+2, j],
+                   [2-self.size, i+2, j],
+                   [2-self.size, i, j]
+                  ] for i in range(-self.size+2, self.size-2, 2)
+                 ] for j in range(-self.size+2, self.size-2, 2)],
 
                  # Back 2 Blue
-                 [[-1, -1, 2-self.size],
-                  [-1, 1, 2-self.size],
-                  [1, 1, 2-self.size],
-                  [1, -1, 2-self.size],
-                  [-1, -1, -self.size],
-                  [-1, 1, -self.size],
-                  [1, 1, -self.size],
-                  [1, -1, -self.size]],
+                 [[[[i, j, 2-self.size],
+                    [i, j+2, 2-self.size],
+                    [i+2, j+2, 2-self.size],
+                    [i+2, j, 2-self.size],
+                    [i, j, -self.size],
+                    [i, j+2, -self.size],
+                    [i+2, j+2, -self.size],
+                    [i+2, j, -self.size]
+                   ] for i in range(-self.size+2, self.size-2, 2)
+                  ] for j in range(-self.size+2, self.size-2, 2)],
 
                  # Right 3 Red
-                 [[self.size-2, -1, 1],
-                  [self.size-2, 1, 1],
-                  [self.size, 1, 1],
-                  [self.size, -1, 1],
-                  [self.size-2, -1, -1],
-                  [self.size-2, 1, -1],
-                  [self.size, 1, -1],
-                  [self.size, -1, -1]],
+                 [[[[self.size-2, i, j+2],
+                    [self.size-2, i+2, j+2],
+                    [self.size, i+2, j+2],
+                    [self.size, i, j+2],
+                    [self.size-2, i, j],
+                    [self.size-2, i+2, j],
+                    [self.size, i+2, j],
+                    [self.size, i, j]
+                   ] for i in range(-self.size+2, self.size-2, 2)
+                  ] for j in range(-self.size+2, self.size-2, 2)],
 
                  # Up 4 White
-                 [[-1, self.size-2, 1],
-                  [-1, self.size, 1],
-                  [1, self.size, 1],
-                  [1, self.size-2, 1],
-                  [-1, self.size-2, -1],
-                  [-1, self.size, -1],
-                  [1, self.size, -1],
-                  [1, self.size-2, -1]],
+                 [[[[i, self.size-2, j+2],
+                    [i, self.size, j+2],
+                    [i+2, self.size, j+2],
+                    [i+2, self.size-2, j+2],
+                    [i, self.size-2, j],
+                    [i, self.size, j],
+                    [i+2, self.size, j],
+                    [i+2, self.size-2, j]
+                   ] for i in range(-self.size+2, self.size-2, 2)
+                  ] for j in range(-self.size+2, self.size-2, 2)],
 
                  # Down 5 Yellow
-                 [[-1, -self.size, 1],
-                  [-1, 2-self.size, 1],
-                  [1, 2-self.size, 1],
-                  [1, -self.size, 1],
-                  [-1, -self.size, -1],
-                  [-1, 2-self.size, -1],
-                  [1, 2-self.size, -1],
-                  [1, -self.size, -1]]
+                 [[[[i, -self.size, j+2],
+                    [i, 2-self.size, j+2],
+                    [i+2, 2-self.size, j+2],
+                    [i+2, -self.size, j+2],
+                    [i, -self.size, j],
+                    [i, 2-self.size, j],
+                    [i+2, 2-self.size, j],
+                    [i+2, -self.size, j]
+                   ] for i in range(-self.size+2, self.size-2, 2)
+                  ] for j in range(-self.size+2, self.size-2, 2)]
             ]
 
         else:
@@ -100,135 +122,159 @@ class Geometry:
 
         # Have to add this yet, need something to generate it for different sizes
         if self.size < 3:
-            self.dege_pieces = [[[[0,0,0] for i in range(8)] for j in range(4)] for k in range(3)]
+            self.edge_pieces = [[[[0,0,0] for i in range(8)] for j in range(4)] for k in range(3)]
+            self.edge_pieces = [[[[[0,0,0] for i in range(8)] for l in range(self.size)] for j in range(4)] for k in range(3)]
         else:
             #for i in range(-self.size, self.size, 2):
             self.edge_pieces = [
                 # X
                 # 0
-                [[[-1, -self.size, self.size],
-                  [-1, 2-self.size, self.size],
-                  [1, 2-self.size, self.size],
-                  [1, -self.size, self.size],
-                  [-1, -self.size, -2+self.size],
-                  [-1, 2-self.size, -2+self.size],
-                  [1, 2-self.size, -2+self.size],
-                  [1, -self.size, -2+self.size]],
+                [
+                 #[[-1, -self.size, self.size],
+                 # [-1, 2-self.size, self.size],
+                 # [1, 2-self.size, self.size],
+                 # [1, -self.size, self.size],
+                 # [-1, -self.size, -2+self.size],
+                 # [-1, 2-self.size, -2+self.size],
+                 # [1, 2-self.size, -2+self.size],
+                 # [1, -self.size, -2+self.size]],
+                 #[self.x_zero(i) for i in range(-self.size+2, self.size-2, 2)],
+                 [[[i, -self.size, self.size],
+                   [i, 2-self.size, self.size],
+                   [i+2, 2-self.size, self.size],
+                   [i+2, -self.size, self.size],
+                   [i, -self.size, self.size-2],
+                   [i, 2-self.size, self.size-2],
+                   [i+2, 2-self.size, self.size-2],
+                   [i+2, -self.size, self.size-2]
+                 ] for i in range(-self.size+2, self.size-2, 2)],
 
                  # 1
-                 [[-1, self.size-2, self.size],
-                  [-1, self.size, self.size],
-                  [1, self.size, self.size],
-                  [1, self.size-2, self.size],
-                  [-1, self.size-2, self.size-2],
-                  [-1, self.size, self.size-2],
-                  [1, self.size, self.size-2],
-                  [1, self.size-2, self.size-2]],
+                 [[[i, self.size-2, self.size],
+                   [i, self.size, self.size],
+                   [i+2, self.size, self.size],
+                   [i+2, self.size-2, self.size],
+                   [i, self.size-2, self.size-2],
+                   [i, self.size, self.size-2],
+                   [i+2, self.size, self.size-2],
+                   [i+2, self.size-2, self.size-2]
+                 ] for i in range(-self.size+2, self.size-2, 2)],
 
                  # 2
-                 [[-1, -2+self.size, 2-self.size],
-                  [-1, self.size, 2-self.size],
-                  [1, self.size, 2-self.size],
-                  [1, -2+self.size, 2-self.size],
-                  [-1, -2+self.size, -self.size],
-                  [-1, self.size, -self.size],
-                  [1, self.size, -self.size],
-                  [1, -2+self.size, -self.size]],
+                 [[[i, -2+self.size, 2-self.size],
+                   [i, self.size, 2-self.size],
+                   [i+2, self.size, 2-self.size],
+                   [i+2, -2+self.size, 2-self.size],
+                   [i, -2+self.size, -self.size],
+                   [i, self.size, -self.size],
+                   [i+2, self.size, -self.size],
+                   [i+2, -2+self.size, -self.size]
+                 ] for i in range(-self.size+2, self.size-2, 2)],
 
                  # 3
-                 [[-1, -self.size, 2-self.size],
-                  [-1, 2-self.size, 2-self.size],
-                  [1, 2-self.size, 2-self.size],
-                  [1, -self.size, 2-self.size],
-                  [-1, -self.size, -self.size],
-                  [-1, 2-self.size, -self.size],
-                  [1, 2-self.size, -self.size],
-                  [1, -self.size, -self.size]]],
+                 [[[i, -self.size, 2-self.size],
+                   [i, 2-self.size, 2-self.size],
+                   [i+2, 2-self.size, 2-self.size],
+                   [i+2, -self.size, 2-self.size],
+                   [i, -self.size, -self.size],
+                   [i, 2-self.size, -self.size],
+                   [i+2, 2-self.size, -self.size],
+                   [i+2, -self.size, -self.size]
+                 ] for i in range(-self.size+2, self.size-2, 2)],
+                 ],
 
                 # Y
                 # 0
-                [[[-self.size, -1, self.size],
-                  [-self.size, 1, self.size],
-                  [2-self.size, 1, self.size],
-                  [2-self.size, -1, self.size],
-                  [-self.size, -1, -2+self.size],
-                  [-self.size, 1, -2+self.size],
-                  [2-self.size, 1, -2+self.size],
-                  [2-self.size, -1, -2+self.size]],
+                [[[[-self.size, i, self.size],
+                   [-self.size, i+2, self.size],
+                   [2-self.size, i+2, self.size],
+                   [2-self.size, i, self.size],
+                   [-self.size, i, -2+self.size],
+                   [-self.size, i+2, -2+self.size],
+                   [2-self.size, i+2, -2+self.size],
+                   [2-self.size, i, -2+self.size]
+                 ] for i in range(-self.size+2, self.size-2, 2)],
 
                  # 1
-                 [[-self.size, -1, 2-self.size],
-                  [-self.size, 1, 2-self.size],
-                  [2-self.size, 1, 2-self.size],
-                  [2-self.size, -1, 2-self.size],
-                  [-self.size, -1, -self.size],
-                  [-self.size, 1, -self.size],
-                  [2-self.size, 1, -self.size],
-                  [2-self.size, -1, -self.size]],
+                 [[[-self.size, i, 2-self.size],
+                   [-self.size, i+2, 2-self.size],
+                   [2-self.size, i+2, 2-self.size],
+                   [2-self.size, i, 2-self.size],
+                   [-self.size, i, -self.size],
+                   [-self.size, i+2, -self.size],
+                   [2-self.size, i+2, -self.size],
+                   [2-self.size, i, -self.size]
+                 ] for i in range(-self.size+2, self.size-2, 2)],
 
                  # 2
-                 [[-2+self.size, -1, 2-self.size],
-                  [-2+self.size, 1, 2-self.size],
-                  [self.size, 1, 2-self.size],
-                  [self.size, -1, 2-self.size],
-                  [-2+self.size, -1, -self.size],
-                  [-2+self.size, 1, -self.size],
-                  [self.size, 1, -self.size],
-                  [self.size, -1, -self.size]],
+                 [[[-2+self.size, i, 2-self.size],
+                   [-2+self.size, i+2, 2-self.size],
+                   [self.size, i+2, 2-self.size],
+                   [self.size, i, 2-self.size],
+                   [-2+self.size, i, -self.size],
+                   [-2+self.size, i+2, -self.size],
+                   [self.size, i+2, -self.size],
+                   [self.size, i, -self.size]
+                 ] for i in range(-self.size+2, self.size-2, 2)],
 
                  # 3
-                 [[-2+self.size, -1, self.size],
-                  [-2+self.size, 1, self.size],
-                  [self.size, 1, self.size],
-                  [self.size, -1, self.size],
-                  [-2+self.size, -1, -2+self.size],
-                  [-2+self.size, 1, -2+self.size],
-                  [self.size, 1, -2+self.size],
-                  [self.size, -1, -2+self.size]]],
+                 [[[-2+self.size, i, self.size],
+                   [-2+self.size, i+2, self.size],
+                   [self.size, i+2, self.size],
+                   [self.size, i, self.size],
+                   [-2+self.size, i, -2+self.size],
+                   [-2+self.size, i+2, -2+self.size],
+                   [self.size, i+2, -2+self.size],
+                   [self.size, i, -2+self.size]
+                 ] for i in range(-self.size+2, self.size-2, 2)]],
 
                 # Z
                 # 0
-                [[[-self.size, -self.size, 1],
-                  [-self.size, 2-self.size, 1],
-                  [2-self.size, 2-self.size, 1],
-                  [2-self.size, -self.size, 1],
-                  [-self.size, -self.size, -1],
-                  [-self.size, 2-self.size, -1],
-                  [2-self.size, 2-self.size, -1],
-                  [2-self.size, -self.size, -1]],
+                [[[[-self.size, -self.size, i+2],
+                   [-self.size, 2-self.size, i+2],
+                   [2-self.size, 2-self.size, i+2],
+                   [2-self.size, -self.size, i+2],
+                   [-self.size, -self.size, i],
+                   [-self.size, 2-self.size, i],
+                   [2-self.size, 2-self.size, i],
+                   [2-self.size, -self.size, i]
+                 ] for i in range(-self.size+2, self.size-2, 2)],
 
                  # 1
-                 [[-self.size, -2+self.size, 1],
-                  [-self.size, self.size, 1],
-                  [2-self.size, self.size, 1],
-                  [2-self.size, -2+self.size, 1],
-                  [-self.size, -2+self.size, -1],
-                  [-self.size, self.size, -1],
-                  [2-self.size, self.size, -1],
-                  [2-self.size, -2+self.size, -1]],
+                 [[[-self.size, -2+self.size, i+2],
+                   [-self.size, self.size, i+2],
+                   [2-self.size, self.size, i+2],
+                   [2-self.size, -2+self.size, i+2],
+                   [-self.size, -2+self.size, i],
+                   [-self.size, self.size, i],
+                   [2-self.size, self.size, i],
+                   [2-self.size, -2+self.size, i]
+                 ] for i in range(-self.size+2, self.size-2, 2)],
 
                  # 2
-                 [[-2+self.size, -2+self.size, 1],
-                  [-2+self.size, self.size, 1],
-                  [self.size, self.size, 1],
-                  [self.size, -2+self.size, 1],
-                  [-2+self.size, -2+self.size, -1],
-                  [-2+self.size, self.size, -1],
-                  [self.size, self.size, -1],
-                  [self.size, -2+self.size, -1]],
+                 [[[-2+self.size, -2+self.size, i+2],
+                   [-2+self.size, self.size, i+2],
+                   [self.size, self.size, i+2],
+                   [self.size, -2+self.size, i+2],
+                   [-2+self.size, -2+self.size, i],
+                   [-2+self.size, self.size, i],
+                   [self.size, self.size, i],
+                   [self.size, -2+self.size, i]
+                 ] for i in range(-self.size+2, self.size-2, 2)],
 
                  # 3
-                 [[-2+self.size, -self.size, 1],
-                  [-2+self.size, 2-self.size, 1],
-                  [self.size, 2-self.size, 1],
-                  [self.size, -self.size, 1],
-                  [-2+self.size, -self.size, -1],
-                  [-2+self.size, 2-self.size, -1],
-                  [self.size, 2-self.size, -1],
-                  [self.size, -self.size, -1]]]
+                 [[[-2+self.size, -self.size, i+2],
+                   [-2+self.size, 2-self.size, i+2],
+                   [self.size, 2-self.size, i+2],
+                   [self.size, -self.size, i+2],
+                   [-2+self.size, -self.size, i],
+                   [-2+self.size, 2-self.size, i],
+                   [self.size, 2-self.size, i],
+                   [self.size, -self.size, i]
+                 ] for i in range(-self.size+2, self.size-2, 2)]],
             ]
 
-       # Have to add this yet, need something to generate it for different sizes
+        # Have to add this yet, need something to generate it for different sizes
         self.corner_pieces = [
             # Front
             # 0
@@ -394,6 +440,8 @@ class Geometry:
         )
 
         # Need to make this autogenerate as well I belive
+        # autogenerating is not urgent as this is only used
+        # in cube.py render_lines function which I don't know if it is even called
         self.cube_edges = (
             (0, 1),
             (0, 3),
@@ -409,7 +457,7 @@ class Geometry:
             (7, 6),
         )
 
-        # Need to make this autogenerate
+        # I don't think this needs to be changed
         self.cube_surfaces = (
             [0, 1, 2, 3], # front 0
             [4, 5, 1, 0], # left 1
@@ -460,3 +508,18 @@ class Geometry:
         ]
 
     def add_padding(self, value): pass
+
+    def center_piece(self, value):
+        return
+        front = [
+            [[[i, j, self.size],
+              [i, j+2, self.size],
+              [i+2, j+2, self.size],
+              [i+2, j, self.size],
+              [i, j, self.size-2],
+              [i, j+2, self.size-2],
+              [i+2, j+2, self.size-2],
+              [i+2, j, self.size-2]
+             ] for i in range(-self.size+2, self.size-2, 2)
+            ] for j in range(-self.size+2, self.size-2, 2)
+        ]
